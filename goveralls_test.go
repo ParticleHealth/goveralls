@@ -85,7 +85,7 @@ func TestCustomJobId(t *testing.T) {
 	jobBodyChannel := make(chan Job, 16)
 	fs := fakeServerWithPayloadChannel(jobBodyChannel)
 
-	b, err := testRun("-jobid=123abc", "-package=github.com/mattn/goveralls/tester", "-endpoint", "-v", "-endpoint", fs.URL)
+	b, err := testRun("-jobid=123abc", "-package=github.com/particlehealth/goveralls/tester", "-endpoint", "-v", "-endpoint", fs.URL)
 	if err != nil {
 		t.Fatal("Expected exit code 0 got 1", err, string(b))
 	}
@@ -119,7 +119,7 @@ func TestVerboseArg(t *testing.T) {
 	t.Run("with verbose", func(t *testing.T) {
 		t.Parallel()
 
-		b, err := testRun("-package=github.com/mattn/goveralls/tester", "-v", "-endpoint", "-v", "-endpoint", fs.URL)
+		b, err := testRun("-package=github.com/particlehealth/goveralls/tester", "-v", "-endpoint", "-v", "-endpoint", fs.URL)
 		if err != nil {
 			t.Fatal("Expected exit code 0 got 1", err, string(b))
 		}
@@ -132,7 +132,7 @@ func TestVerboseArg(t *testing.T) {
 	t.Run("without verbose", func(t *testing.T) {
 		t.Parallel()
 
-		b, err := testRun("-package=github.com/mattn/goveralls/tester", "-endpoint", "-v", "-endpoint", fs.URL)
+		b, err := testRun("-package=github.com/particlehealth/goveralls/tester", "-endpoint", "-v", "-endpoint", fs.URL)
 		if err != nil {
 			t.Fatal("Expected exit code 0 got 1", err, string(b))
 		}
@@ -151,12 +151,12 @@ func TestShowArg(t *testing.T) {
 	t.Run("with show", func(t *testing.T) {
 		t.Parallel()
 
-		b, err := testRun("-package=github.com/mattn/goveralls/tester/...", "-show", "-endpoint", "-show", "-endpoint", fs.URL)
+		b, err := testRun("-package=github.com/particlehealth/goveralls/tester/...", "-show", "-endpoint", "-show", "-endpoint", fs.URL)
 		if err != nil {
 			t.Fatal("Expected exit code 0 got 1", err, string(b))
 		}
 
-		expected := `goveralls: github.com/mattn/goveralls/tester
+		expected := `goveralls: github.com/particlehealth/goveralls/tester
 Fake message
 http://fake.url
 `
@@ -174,7 +174,7 @@ func TestRaceArg(t *testing.T) {
 	t.Run("it should pass the test", func(t *testing.T) {
 		t.Parallel()
 
-		b, err := testRun("-package=github.com/mattn/goveralls/tester", "-race", "-endpoint", fs.URL)
+		b, err := testRun("-package=github.com/particlehealth/goveralls/tester", "-race", "-endpoint", fs.URL)
 		if err != nil {
 			t.Fatal("Expected exit code 0 got 1", err, string(b))
 		}
@@ -190,7 +190,7 @@ func TestUploadSource(t *testing.T) {
 		jobBodyChannel := make(chan Job, 16)
 		fs := fakeServerWithPayloadChannel(jobBodyChannel)
 
-		b, err := testRun("-uploadsource=true", "-package=github.com/mattn/goveralls/tester", "-endpoint", "-v", "-endpoint", fs.URL)
+		b, err := testRun("-uploadsource=true", "-package=github.com/particlehealth/goveralls/tester", "-endpoint", "-v", "-endpoint", fs.URL)
 		if err != nil {
 			t.Fatal("Expected exit code 0 got 1", err, string(b))
 		}
@@ -210,7 +210,7 @@ func TestUploadSource(t *testing.T) {
 		jobBodyChannel := make(chan Job, 16)
 		fs := fakeServerWithPayloadChannel(jobBodyChannel)
 
-		b, err := testRun("-uploadsource=false", "-package=github.com/mattn/goveralls/tester", "-endpoint", "-v", "-endpoint", fs.URL)
+		b, err := testRun("-uploadsource=false", "-package=github.com/particlehealth/goveralls/tester", "-endpoint", "-v", "-endpoint", fs.URL)
 		if err != nil {
 			t.Fatal("Expected exit code 0 got 1", err, string(b))
 		}
