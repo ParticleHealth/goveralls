@@ -13,6 +13,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"github.com/gobwas/glob"
 	"go/build"
 	"io/ioutil"
 	"log"
@@ -63,7 +64,7 @@ var (
 	endpoint      = flag.String("endpoint", "https://coveralls.io", "Hostname to submit Coveralls data to")
 	service       = flag.String("service", "", "The CI service or other environment in which the test suite was run. ")
 	shallow       = flag.Bool("shallow", false, "Shallow coveralls internal server errors")
-	ignore        = flag.String("ignore", "", "Comma separated files to ignore")
+	ignore        = flag.String("ignore", "", "Comma separated directories or files to ignore")
 	insecure      = flag.Bool("insecure", false, "Set insecure to skip verification of certificates")
 	uploadSource  = flag.Bool("uploadsource", true, "Read local source and upload it to coveralls")
 	allowGitFetch = flag.Bool("allowgitfetch", true, "Perform a 'git fetch' when the reference is different than HEAD; used for GitHub Actions integration")
@@ -465,14 +466,14 @@ func process() error {
 		for i, pattern := range patterns {
 			patterns[i] = strings.TrimSpace(pattern)
 		}
+
 		var files []*SourceFile
+
 	Files:
 		for _, file := range j.SourceFiles {
 			for _, pattern := range patterns {
-				match, err := filepath.Match(pattern, file.Name)
-				if err != nil {
-					return err
-				}
+				g := glob.MustCompile(pattern)
+				match := g.Match(file.Name)
 				if match {
 					fmt.Printf("ignoring %s\n", file.Name)
 					continue Files
