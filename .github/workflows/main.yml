@@ -32,16 +32,16 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          path: src/github.com/mattn/goveralls
+          path: src/github.com/particlehealth/goveralls
           ref: ${{ github.event.pull_request.head.sha }}
       - name: build
         run: |
           go get ./...
           go install .
-        working-directory: src/github.com/mattn/goveralls
+        working-directory: src/github.com/particlehealth/goveralls
       - name: test
         run: goveralls -service=github -parallel -flagname="Unit-${{ matrix.os }}-Go-${{ matrix.go }}"
-        working-directory: src/github.com/mattn/goveralls
+        working-directory: src/github.com/particlehealth/goveralls
         env:
           COVERALLS_TOKEN: ${{ github.token }}
           GIT_BRANCH: ${{ github.head_ref }}
@@ -59,7 +59,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: finish
         run: |
-          go run github.com/mattn/goveralls -parallel-finish
+          go run github.com/particlehealth/goveralls -parallel-finish
         env:
           COVERALLS_TOKEN: ${{ github.token }}
           GIT_BRANCH: ${{ github.head_ref }}

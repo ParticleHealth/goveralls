@@ -9,7 +9,7 @@ continuous code coverage tracking system.
 `goveralls` requires a working Go installation (Go-1.2 or higher).
 
 ```bash
-$ go install github.com/mattn/goveralls@latest
+$ go install github.com/particlehealth/goveralls@latest
 ```
 
 
@@ -64,7 +64,7 @@ jobs:
       run: |
         go test -race -covermode atomic -coverprofile=covprofile ./...
     - name: Install goveralls
-      run: go install github.com/mattn/goveralls@latest
+      run: go install github.com/particlehealth/goveralls@latest
     - name: Send coverage
       env:
         COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -111,7 +111,7 @@ jobs:
           go test -race -covermode atomic -coverprofile=covprofile ./...
         working-directory: src/example.com/owner/repo # add this
       - name: Install goveralls
-        run: go install github.com/mattn/goveralls@latest
+        run: go install github.com/particlehealth/goveralls@latest
       - name: Send coverage
         env:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -132,7 +132,7 @@ language: go
 go:
   - tip
 before_install:
-  - go install github.com/mattn/goveralls@latest
+  - go install github.com/particlehealth/goveralls@latest
 script:
   - $GOPATH/bin/goveralls -service=travis-ci
 ```
@@ -146,7 +146,7 @@ language: go
 go:
   - tip
 before_install:
-  - go install github.com/mattn/goveralls@latest
+  - go install github.com/particlehealth/goveralls@latest
 script:
   - $GOPATH/bin/goveralls -service=travis-pro
 ```
@@ -175,7 +175,7 @@ env:
 ### For others:
 
 ```
-$ go install github.com/mattn/goveralls@latest
+$ go install github.com/particlehealth/goveralls@latest
 $ go test -covermode=count -coverprofile=profile.cov
 $ goveralls -coverprofile=profile.cov -service=travis-ci
 ```
@@ -191,7 +191,7 @@ COVERALLS_TOKEN=your_token_goes_here
 Replace the `go test` line in your `Commands` with these lines:
 
 ```
-$ go install github.com/mattn/goveralls@latest
+$ go install github.com/particlehealth/goveralls@latest
 $ goveralls -service drone.io
 ```
 
@@ -213,7 +213,7 @@ In your `circle.yml` add the following commands under the `test` section.
 ```yml
 test:
   pre:
-    - go install github.com/mattn/goveralls@latest
+    - go install github.com/particlehealth/goveralls@latest
   override:
     - go test -v -cover -race -coverprofile=/home/ubuntu/coverage.out
   post:
@@ -235,7 +235,7 @@ More instructions on how to do this can be found in the [Semaphore documentation
 Replace the `go test` line in your `Commands` with these lines:
 
 ```
-$ go install github.com/mattn/goveralls@latest
+$ go install github.com/particlehealth/goveralls@latest
 $ goveralls -service semaphore
 ```
 
@@ -289,7 +289,7 @@ COVERALLS_TOKEN=your_token_goes_here
 Setup build steps:
 
 ```
-$ go install github.com/mattn/goveralls@latest
+$ go install github.com/particlehealth/goveralls@latest
 $ export PULL_REQUEST_NUMBER=%teamcity.build.branch%
 $ goveralls -service teamcity -jobid %teamcity.build.id% -jobnumber %build.number%
 ```
@@ -316,7 +316,7 @@ test:
   when: always
   script:
     - go test -covermode atomic -coverprofile=coverage.txt ./...
-    - go install github.com/mattn/goveralls@latest
+    - go install github.com/particlehealth/goveralls@latest
     - goveralls -service=gitlab -coverprofile=coverage.txt
 ```
 
@@ -332,6 +332,7 @@ $ goveralls -insecure
 
 * Yasuhiro Matsumoto (a.k.a. mattn)
 * haya14busa
+* Gregory Hunt (a.k.a gregoryhunt)
 
 # License
 
